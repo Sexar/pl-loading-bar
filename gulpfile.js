@@ -67,11 +67,13 @@ gulp.task('ts', () => {
 
     // Source files.
     let srcFiles = [
-        srcPath.ts + '**/*.ts'
+        `${srcPath.ts}core/*.ts`,
+        `${srcPath.ts}element/*.ts`,
+        `${srcPath.ts}*.ts`
     ];
 
     // Output file.
-    let outputFile = 'pl-contact-form.min.ts';
+    let outputFile = 'pl-loading-bar.min.ts';
 
     return gulp.src(srcFiles)
         .pipe(plumber())
