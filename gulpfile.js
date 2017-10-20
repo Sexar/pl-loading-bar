@@ -29,7 +29,7 @@ let destPath = {
 /**
  * Reload on change.
  */
-gulp.task('reload', ['styl', 'ts'], () => {
+gulp.task('reload', ['stylus', 'ts'], () => {
     gulp.src(srcPath.root)
         .pipe(livereload());
 });
@@ -49,7 +49,7 @@ gulp.task('watch', () => {
 
     livereload.listen();
 
-    gulp.watch(files, ['styl', 'ts', 'reload']);
+    gulp.watch(files, ['stylus', 'ts', 'reload']);
 });
 
 
@@ -78,7 +78,7 @@ gulp.task('stylus', () => {
         .pipe(stylus())
         .pipe(concat(outputFile))
         .pipe(autoprefixer(autoPrefixerOpts))
-        .pipe(gulp.dest(srcPath.css));
+        .pipe(gulp.dest(destPath.css));
 });
 
 
@@ -101,7 +101,7 @@ gulp.task('ts', () => {
     ];
 
     // Output file.
-    let outputFile = 'pl-loading-bar.min.ts';
+    let outputFile = 'pl-progress-bar.min.ts';
 
     return gulp.src(srcFiles)
         .pipe(plumber())

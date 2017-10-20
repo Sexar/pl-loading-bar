@@ -56,9 +56,20 @@
         <meta name="format-detection" content="telephone=no">
 
         <!-- Page Styles (dev) -->
-        <link href="styles/styles.css" rel="stylesheet">
+        <link href="styles/css/styles.css" rel="stylesheet">
     </head>
     <body>
 
+        <script src="scripts/js/pl-progress-bar.min.js"></script>
+        <script>
+            (function () {
+                'use strict';
+
+                let progressBar = new pl.ProgressBar();
+
+                document.body.append(progressBar.element);
+
+            })();
+        </script>
     </body>
 </html>
