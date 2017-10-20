@@ -1,22 +1,25 @@
 /**
  * Created by cesarmejia on 22/08/2017.
  */
-const gulp       = require('gulp');
-const concat     = require('gulp-concat');
-const typescript = require('gulp-typescript');
-const uglify     = require('gulp-uglify');
-const plumber    = require('gulp-plumber');
-const livereload = require('gulp-livereload');
+const gulp         = require('gulp');
+const concat       = require('gulp-concat');
+const stylus       = require('gulp-stylus');
+const typescript   = require('gulp-typescript');
+const uglify       = require('gulp-uglify');
+const plumber      = require('gulp-plumber');
+const autoprefixer = require('gulp-autoprefixer');
+const livereload   = require('gulp-livereload');
 
 
 let srcPath = {
-    css : 'styles/',
+    styl: 'styles/styl/',
     ts  : 'scripts/ts/',
     root: ''
 };
 
 let destPath = {
-    js: 'scripts/js/'
+    css: 'styles/css/',
+    js : 'scripts/js/'
 };
 
 // ---------------------------------------------------------------------
@@ -26,7 +29,7 @@ let destPath = {
 /**
  * Reload on change.
  */
-gulp.task('reload', ['ts'], () => {
+gulp.task('reload', ['styl', 'ts'], () => {
     gulp.src(srcPath.root)
         .pipe(livereload());
 });
@@ -40,19 +43,44 @@ gulp.task('watch', () => {
     // Files to be watched.
     let files = [
         srcPath.ts   + '**/*.ts',
-        srcPath.css  + '**/*.css',
+        srcPath.styl + '**/*.styl',
         srcPath.root + '*.html'
     ];
 
     livereload.listen();
 
-    gulp.watch(files, ['ts', 'reload']);
+    gulp.watch(files, ['styl', 'ts', 'reload']);
 });
 
 
 // ---------------------------------------------------------------------
 // | Build production project.                                         |
 // ---------------------------------------------------------------------
+
+/**
+ * Transpile stylus files.
+ * Reference: https://github.com/stevelacy/gulp-stylus
+ */
+gulp.task('stylus', () => {
+    // Source files.
+    let srcFiles = `${srcPath.styl}**/*.styl`;
+
+    let autoPrefixerOpts = {
+        browsers: 'last 2 versions',
+        cascade: true
+    };
+
+    // Output file.
+    let outputFile = 'styles.css';
+
+    return gulp.src(srcFiles)
+        .pipe(plumber())
+        .pipe(stylus())
+        .pipe(concat(outputFile))
+        .pipe(autoprefixer(autoPrefixerOpts))
+        .pipe(gulp.dest(srcPath.css));
+});
+
 
 /**
  * Concatenate and compile typescript files.
