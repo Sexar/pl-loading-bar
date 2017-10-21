@@ -5,11 +5,28 @@ module pl {
 
     export class ProgressBar extends Element<HTMLElement> {
 
+        // region Static
+        /**
+         * @type {Array}
+         */
+        private static times: Array<number> = [];
+        // endregion
+
         // region Fields
         /**
          * @type {number}
          */
-        private progress: number = 0;
+        private progress: number = 31;
+
+        /**
+         * @type {Object}
+         */
+        private settings: Object;
+
+        /**
+         * @type {Element<HTMLElement>}
+         */
+        private barEl: Element<HTMLElement>;
 
         /**
          * @type {Element<HTMLElement>}
@@ -20,11 +37,6 @@ module pl {
          * @type {Element<HTMLElement>}
          */
         private railEl: Element<HTMLElement>;
-
-        /**
-         * @type {Element<HTMLElement>}
-         */
-        private barEl: Element<HTMLElement>;
         // endregion
 
         /**
@@ -38,6 +50,7 @@ module pl {
             this.addClass('progress-bar');
 
             this.buildOut();
+            this.update();
         }
 
         // region Private Methods
@@ -61,6 +74,13 @@ module pl {
          * Update progress bar view.
          */
         private update() {
+            let percentage = `${this.progress}%`;
+
+            // Update number progress
+            this.numberEl.text(percentage);
+
+            // Update bar progress
+            this.barEl.css('width', percentage);
 
         }
         // endregion

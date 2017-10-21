@@ -1,7 +1,55 @@
+/* Load fonts */
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200")
+
+*
+  box-sizing border-box
+
+body,
+html
+  height 100%
+  margin 0
+  width 100%
+
 body
-  color #333
-  font-family 'Arial', sans-serif
-  font-size 13px
+  background-color #F44336
+  color #fff
+  font-family 'Source Sans Pro', sans-serif
+  font-size 14px
+
+#wrapper
+  left 50%
+  max-width 500px
+  position absolute
+  top 50%
+  transform translate(-50%, -50%)
+  width 100%
+
+  h1
+    font-size 3.2em
+    font-weight 200
+    margin 0 0 .65em
+    text-align center
+    text-shadow 1px 2px 3px rgba(0, 0, 0, .65)
 
 .progress-bar
-  display block
+  margin 0 auto
+  max-width 380px
+  width 100%
+
+  .number
+    font-size 15px
+    margin-bottom 5px
+    text-align center
+
+  .rail
+    border 1px solid #FF8A80
+    border-radius 3px
+    height 30px
+    padding 3px
+    width 100%
+
+  .bar
+    background-color #FF8A80
+    border-radius 3px
+    height 100%
+    width 0

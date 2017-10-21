@@ -60,14 +60,19 @@
     </head>
     <body>
 
+        <div id="wrapper">
+            <h1>Progress Bar</h1>
+        </div>
+
         <script src="scripts/js/pl-progress-bar.min.js"></script>
         <script>
             (function () {
                 'use strict';
 
+                let wrapperEl = document.getElementById('wrapper');
                 let progressBar = new pl.ProgressBar();
 
-                document.body.append(progressBar.element);
+                wrapperEl.append( progressBar.element );
 
             })();
         </script>
