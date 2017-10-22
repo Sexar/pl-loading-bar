@@ -62,19 +62,51 @@
 
         <div id="wrapper">
             <h1>Progress Bar</h1>
+            <button>Send message</button>
         </div>
 
         <script src="scripts/js/pl-progress-bar.min.js"></script>
         <script>
-            (function () {
+            (function (w) {
                 'use strict';
 
                 let wrapperEl = document.getElementById('wrapper');
+                let button = wrapperEl.querySelector('button');
                 let progressBar = new pl.ProgressBar();
+                let request = new XMLHttpRequest();
 
-                wrapperEl.append( progressBar.element );
+                button.parentNode.insertBefore(progressBar.element, button);
 
-            })();
+
+                // Set XMLHttpRequest
+                let handleReadyStateChange = function () {
+                    let DONE = 4; // readyState 4 means the request is done.
+                    let OK   = 200; // status 200 is a successful return.
+
+                    if (request.readyState === DONE) {
+                        progressBar.finish();
+
+                        console.log("Response %o", request.response);
+
+                        setTimeout(function() { progressBar.reset(); }, 2500);
+                    }
+                };
+
+                let makeAjaxRequest = function () {
+                    progressBar.start();
+
+                    request.open("GET", "ajax-request.php");
+                    request.send();
+                };
+
+                request.onreadystatechange = handleReadyStateChange;
+
+
+                // Set button click handler.
+                button.addEventListener('click', makeAjaxRequest, false);
+
+
+            })(window);
         </script>
     </body>
 </html>

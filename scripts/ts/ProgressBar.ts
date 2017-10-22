@@ -10,13 +10,29 @@ module pl {
          * @type {Array}
          */
         private static times: Array<number> = [];
+
+        /**
+         * Generate random number between a range.
+         * @param {number} min
+         * @param {number} max
+         * @returns {number}
+         */
+        static getRangeRandom(min: number, max: number): number {
+            return Math.floor( Math.random() * (max - min + 1) ) + min;
+        }
+
         // endregion
 
         // region Fields
         /**
          * @type {number}
          */
-        private progress: number = 31;
+        private progress: number = 0;
+
+        /**
+         * @type {number}
+         */
+        private timer: number;
 
         /**
          * @type {Object}
@@ -90,21 +106,24 @@ module pl {
          * Ends the progress.
          */
         finish() {
-
+            this.progress = 100;
+            this.update();
         }
 
         /**
          * Starts the progress.
          */
         start() {
-
+            this.progress = ProgressBar.getRangeRandom(50, 70);
+            this.update();
         }
 
         /**
          * Reset the progress.
          */
         reset() {
-
+            this.progress = 0;
+            this.update();
         }
         // endregion
 
