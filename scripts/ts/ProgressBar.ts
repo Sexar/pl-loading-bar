@@ -32,7 +32,7 @@ module pl {
         /**
          * @type {number}
          */
-        private timer: number;
+        private interval: number;
 
         /**
          * @type {Object}
@@ -85,20 +85,6 @@ module pl {
 
             this.railEl.append(this.barEl);
         }
-
-        /**
-         * Update progress bar view.
-         */
-        private update() {
-            let percentage = `${this.progress}%`;
-
-            // Update number progress
-            this.numberEl.text(percentage);
-
-            // Update bar progress
-            this.barEl.css('width', percentage);
-
-        }
         // endregion
 
         // region Methods
@@ -108,14 +94,8 @@ module pl {
         finish() {
             this.progress = 100;
             this.update();
-        }
 
-        /**
-         * Starts the progress.
-         */
-        start() {
-            this.progress = ProgressBar.getRangeRandom(50, 70);
-            this.update();
+            clearInterval(this.interval);
         }
 
         /**
@@ -124,6 +104,39 @@ module pl {
         reset() {
             this.progress = 0;
             this.update();
+
+            clearInterval(this.interval);
+        }
+
+        /**
+         * Starts the progress.
+         */
+        start() {
+            let delay = 750;
+
+            this.progress = ProgressBar.getRangeRandom(40, 70);
+            this.update();
+
+            this.interval = setInterval(() => {
+                if (this.progress >= 92) { clearInterval(this.interval); }
+
+                this.progress += ProgressBar.getRangeRandom(1, 5);
+                this.update();
+            }, delay);
+        }
+
+        /**
+         * Update progress bar view.
+         */
+        update() {
+            let percentage = `${this.progress}%`;
+
+            // Update number progress
+            this.numberEl.text(percentage);
+
+            // Update bar progress
+            this.barEl.css('width', percentage);
+
         }
         // endregion
 

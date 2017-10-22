@@ -7,7 +7,7 @@
  */
 
 // Simulate the time that an ajax request could late. (Sending mails, saving in the DB, etc.)
-$seconds = (rand(1000, 2000)) / 1000;
+$seconds = (rand(3000, 4000)) / 1000;
 sleep($seconds);
 
 // Return a success response in JSON format.
