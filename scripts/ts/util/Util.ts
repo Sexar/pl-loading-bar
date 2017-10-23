@@ -1,7 +1,6 @@
 /**
  * Created by cesarmejia on 22/10/2017.
  */
-
 module pl {
 
     export class Util {
