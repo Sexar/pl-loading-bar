@@ -72,7 +72,7 @@
 
                 let wrapperEl = document.getElementById('wrapper');
                 let button = wrapperEl.querySelector('button');
-                let progressBar = new pl.ProgressBar();
+                let progressBar = new pl.ProgressBar({ showPercentage: true });
                 let request = new XMLHttpRequest();
 
                 button.parentNode.insertBefore(progressBar.element, button);

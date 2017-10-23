@@ -30,6 +30,11 @@ module pl {
         private progress: number = 0;
 
         /**
+         * @type {boolean}
+         */
+        private isProgressing: boolean = false;
+
+        /**
          * @type {number}
          */
         private interval: number;
@@ -63,6 +68,13 @@ module pl {
         constructor(settings) {
             super(document.createElement('div'));
 
+            let defaults = {
+                showPercentage: true
+            };
+
+            // Merge default settings with user settings.
+            this.settings = Util.extends(defaults, settings || {});
+
             this.addClass('progress-bar');
 
             this.buildOut();
@@ -74,16 +86,20 @@ module pl {
          * Create the needed elements for progress bar.
          */
         private buildOut() {
-            // Create elements.
-            this.numberEl = Element.create('div.number');
-            this.railEl   = Element.create('div.rail');
-            this.barEl    = Element.create('div.bar');
+            // Create number element.
+            if (this.settings['showPercentage']) {
+                this.numberEl = Element.create('div.number');
+                this.append(this.numberEl);
+            }
 
-            // Append to progress bar element.
-            this.append(this.numberEl);
+            // Create rail element.
+            this.railEl   = Element.create('div.rail');
             this.append(this.railEl);
 
+            // Create bar element.
+            this.barEl    = Element.create('div.bar');
             this.railEl.append(this.barEl);
+
         }
         // endregion
 
@@ -92,6 +108,7 @@ module pl {
          * Ends the progress.
          */
         finish() {
+            this.isProgressing = false;
             this.progress = 100;
             this.update();
 
@@ -102,6 +119,7 @@ module pl {
          * Reset the progress.
          */
         reset() {
+            this.isProgressing = false;
             this.progress = 0;
             this.update();
 
@@ -112,17 +130,18 @@ module pl {
          * Starts the progress.
          */
         start() {
-            let delay = 750;
+            if (this.isProgressing) return;
 
+            this.isProgressing = true;
             this.progress = ProgressBar.getRangeRandom(40, 70);
             this.update();
 
             this.interval = setInterval(() => {
-                if (this.progress >= 92) { clearInterval(this.interval); }
+                if (this.progress >= 89) { clearInterval(this.interval); }
 
-                this.progress += ProgressBar.getRangeRandom(1, 5);
+                this.progress += ProgressBar.getRangeRandom(1, 10);
                 this.update();
-            }, delay);
+            }, 750);
         }
 
         /**
@@ -131,8 +150,10 @@ module pl {
         update() {
             let percentage = `${this.progress}%`;
 
-            // Update number progress
-            this.numberEl.text(percentage);
+            if (this.settings['showPercentage']) {
+                // Update number progress
+                this.numberEl.text(percentage);
+            }
 
             // Update bar progress
             this.barEl.css('width', percentage);
