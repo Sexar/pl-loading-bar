@@ -48,24 +48,24 @@ body {
   transition: background-color 375ms;
   width: 100%;
 }
-.progress-bar {
+.pl-progress-bar {
   margin: 0 auto 25px;
   max-width: 380px;
   width: 100%;
 }
-.progress-bar .number {
+.pl-progress-bar .pl-number {
   font-size: 15px;
   margin-bottom: 5px;
   text-align: center;
 }
-.progress-bar .rail {
+.pl-progress-bar .pl-rail {
   border: 1px solid #ff8a80;
   border-radius: 3px;
   height: 30px;
   padding: 3px;
   width: 100%;
 }
-.progress-bar .bar {
+.pl-progress-bar .pl-bar {
   background-color: #ff8a80;
   border-radius: 3px;
   height: 100%;

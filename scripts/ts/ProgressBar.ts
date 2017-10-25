@@ -75,7 +75,7 @@ module pl {
             // Merge default settings with user settings.
             this.settings = Util.extends(defaults, settings || {});
 
-            this.addClass('progress-bar');
+            this.addClass('pl-progress-bar');
 
             this.buildOut();
             this.update();
@@ -88,16 +88,16 @@ module pl {
         private buildOut() {
             // Create number element.
             if (this.settings['showPercentage']) {
-                this.numberEl = Element.create('div.number');
+                this.numberEl = Element.create('div.pl-number');
                 this.append(this.numberEl);
             }
 
             // Create rail element.
-            this.railEl   = Element.create('div.rail');
+            this.railEl   = Element.create('div.pl-rail');
             this.append(this.railEl);
 
             // Create bar element.
-            this.barEl    = Element.create('div.bar');
+            this.barEl    = Element.create('div.pl-bar');
             this.railEl.append(this.barEl);
 
         }
