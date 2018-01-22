@@ -103,6 +103,7 @@ gulp.task('ts', () => {
 
     // Output file.
     let outputFile = 'pl-progress-bar.min.ts';
+    // let outputFile = 'pl-progress-bar.ts';
 
     return gulp.src(srcFiles)
         .pipe(plumber())

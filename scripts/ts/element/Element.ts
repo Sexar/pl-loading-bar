@@ -484,8 +484,8 @@ module pl {
          * @returns {undefined|text}
          */
         text(value: any) {
-            if ("string" === typeof value) {
-                this._element.innerText = value;
+            if ("undefined" !== typeof value) {
+                this._element.innerText = String(value);
             } else {
                 return this._element.innerText;
             }
@@ -505,7 +505,25 @@ module pl {
         }
 
         /**
-         * Remove the parents of an element fromthe DOM, leaving the element's content in place.
+         * Execute all handlers and behaviors attached to the matched elements for the given event type.
+         * @param {string} type
+         */
+        trigger(type: string) {
+            if ('createEvent' in document) {
+                // Modern browsers, IE9+
+                let ev: Event = document.createEvent('HTMLEvents');
+                ev.initEvent(type, false, true);
+                this._element.dispatchEvent(ev);
+            } else {
+                // IE8
+                // let ev = document.createEventObject();
+                // ev.eventType = type;
+                // this._element.fireEvent(`on${ type }`);
+            }
+        }
+
+        /**
+         * Remove the parents of an element from the DOM, leaving the element's content in place.
          */
         unwrap() {
             let el = this.element;
