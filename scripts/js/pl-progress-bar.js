@@ -869,11 +869,19 @@ var pl;
         function Util() {
         }
         /**
+         * Capitalize text.
+         * @param {string} text
+         * @returns {string}
+         */
+        Util.capitalizeText = function (text) {
+            return text.replace(/\w/, function (l) { return l.toUpperCase(); });
+        };
+        /**
          * Merge objects and create a new one.
          * @param {Array<Object>} objects
          * @return {Object}
          */
-        Util.extends = function () {
+        Util.extendsDefaults = function () {
             var objects = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 objects[_i] = arguments[_i];
@@ -923,7 +931,7 @@ var pl;
                 showPercentage: true
             };
             // Merge default settings with user settings.
-            _this.settings = pl.Util.extends(defaults, settings || {});
+            _this.settings = pl.Util.extendsDefaults(defaults, settings || {});
             _this.addClass('pl-progress-bar');
             _this.buildOut();
             _this.update();

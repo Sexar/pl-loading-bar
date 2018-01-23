@@ -73,7 +73,7 @@ module pl {
             };
 
             // Merge default settings with user settings.
-            this.settings = Util.extends(defaults, settings || {});
+            this.settings = Util.extendsDefaults(defaults, settings || {});
 
             this.addClass('pl-progress-bar');
 

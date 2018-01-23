@@ -6,11 +6,20 @@ module pl {
     export class Util {
 
         /**
+         * Capitalize text.
+         * @param {string} text
+         * @returns {string}
+         */
+        static capitalizeText(text: string) {
+            return text.replace(/\w/, l => l.toUpperCase() );
+        }
+
+        /**
          * Merge objects and create a new one.
          * @param {Array<Object>} objects
          * @return {Object}
          */
-        static extends(...objects) {
+        static extendsDefaults(...objects) {
             let result: Object = {}, i: number;
 
             for (i = 0; i < objects.length; i++) {

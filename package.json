@@ -1,5 +1,5 @@
 {
-  "name": "pl-contact-form",
+  "name": "pl-progress-bar",
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
@@ -11,9 +11,12 @@
     "url": "git+https://github.com/Sexar/pl-contact-form.git"
   },
   "keywords": [
-    "contact-form",
+    "progress bar",
+    "progress",
     "javascript",
-    "typescript"
+    "typescript",
+    "js",
+    "ts"
   ],
   "author": "cesarmejia",
   "license": "MIT",
